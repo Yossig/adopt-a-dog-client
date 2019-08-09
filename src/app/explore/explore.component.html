@@ -1,4 +1,4 @@
-<mat-grid-list cols="4" rowHeight="4:5">
+<mat-grid-list cols="4" rowHeight="9:10" gutterSize="20">
   <mat-grid-tile *ngFor="let dog of dogs">
       <mat-card class="dog-card">
           <mat-card-header>
@@ -6,7 +6,7 @@
             <mat-card-subtitle>{{dog.type}}, {{dog.gender}}, age of {{dog.age}}</mat-card-subtitle>
           </mat-card-header>
           <mat-divider></mat-divider>
-          <img mat-card-image [src]="dog.profile_image" alt="Photo of a Shiba Inu">
+          <img mat-card-image [src]="dog.profile_image">
           <mat-card-content>
               <p>
                 {{dog.description}}
