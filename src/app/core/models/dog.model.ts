@@ -5,5 +5,6 @@ export interface Dog {
   name: string;
   gender: string;
   age: number;
+  profileImage: String;
   owner: User;
 }

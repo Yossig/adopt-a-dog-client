@@ -8,6 +8,7 @@ import {
   MatToolbarModule,
   MatButtonModule
 } from '@angular/material';
+import { ExploreModule } from './explore/explore.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {
     BrowserModule,
     AppRoutingModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    ExploreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
