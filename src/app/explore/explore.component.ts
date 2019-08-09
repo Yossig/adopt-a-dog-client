@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Dog } from '../core/models/dog.model';
-import { ApiService } from '../core/services/api.service';
+import { DogService } from '../core/services/dog.service';
 
 @Component({
   selector: 'app-explore',
@@ -12,11 +12,11 @@ export class ExploreComponent implements OnInit {
   dogs: Dog[];
 
   constructor(
-    private apiService: ApiService
+    private dogService: DogService
   ) { }
 
   ngOnInit() {
-    this.apiService.get('dog').subscribe((data:Dog[]) => {
+    this.dogService.getAll().subscribe((data:Dog[]) => {
       this.dogs = data;
     })
   }
