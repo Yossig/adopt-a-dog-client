@@ -8,7 +8,7 @@ import { Filter } from 'src/app/core/models/filter.model';
   styleUrls: ['./filter-bar.component.css']
 })
 export class FilterBarComponent implements OnInit {
-  filter : Filter;
+  filter: Filter;
 
   @Output() filterRequest = new EventEmitter<Filter>();
 
@@ -16,14 +16,12 @@ export class FilterBarComponent implements OnInit {
 
   ngOnInit() {
     this.filter = {
-      genders: []
+      genders: [],
+      minAge: 0
     }
   }
 
   emitFilterRequest() {
     this.filterRequest.emit(this.filter);
   }
-
-
-
 }
