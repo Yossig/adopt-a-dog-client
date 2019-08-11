@@ -1,18 +1,26 @@
-<app-filter-bar (filterRequest) ="filter($event)"></app-filter-bar>
-<mat-grid-list cols="4" rowHeight="9:10" gutterSize="20">
+<app-filter-bar (filterRequest)="filter($event)"></app-filter-bar>
+
+<mat-grid-list *ngIf="dogs.length" cols="4" rowHeight="9:10" gutterSize="20">
   <mat-grid-tile *ngFor="let dog of dogs">
-      <mat-card class="dog-card">
-          <mat-card-header>
-            <mat-card-title>{{dog.name}}</mat-card-title>
-            <mat-card-subtitle>{{dog.type}}, {{dog.gender}}, age of {{dog.age}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-divider></mat-divider>
-          <img mat-card-image [src]="dog.profile_image">
-          <mat-card-content>
-              <p>
-                {{dog.description}}
-              </p>
-            </mat-card-content>
-        </mat-card>
+    <mat-card class="dog-card">
+      <mat-card-header>
+        <mat-card-title>{{dog.name}}</mat-card-title>
+        <mat-card-subtitle>{{dog.type}}, {{dog.gender}}, age of {{dog.age}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <img mat-card-image [src]="dog.profile_image">
+      <mat-card-content>
+        <p>
+          {{dog.description}}
+        </p>
+      </mat-card-content>
+    </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
+
+<div class="no-results" *ngIf="dogs.length === 0">
+  <img src="../../assets/no-results.png">
+  <h2>
+    Sorry, we did'nt find what you seek...
+  </h2>
+</div>

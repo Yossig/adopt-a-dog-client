@@ -3,4 +3,22 @@
   margin-left:5px;
 }
 
-  
+.no-results {
+  margin:auto;
+  width: 30%;
+  margin-top: 10%;
+  opacity: 0.5;
+}
+
+.no-results h2 {
+  margin: auto;
+  width: 80%;
+}
+
+.no-results img {
+    display: block;
+    width: 30%;
+    height: auto;
+    
+    margin:auto;
+  }
