@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Filter } from 'src/app/core/models/filter.model';
 
 @Component({
   selector: 'app-filter-bar',
@@ -7,10 +8,22 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./filter-bar.component.css']
 })
 export class FilterBarComponent implements OnInit {
-  genders = new FormControl();
+  filter : Filter;
+
+  @Output() filterRequest = new EventEmitter<Filter>();
+
   constructor() { }
 
   ngOnInit() {
+    this.filter = {
+      genders: []
+    }
   }
+
+  emitFilterRequest() {
+    this.filterRequest.emit(this.filter);
+  }
+
+
 
 }

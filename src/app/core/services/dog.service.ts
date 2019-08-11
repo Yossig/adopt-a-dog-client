@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { Dog } from '../models/dog.model';
+import { Filter } from '../models/filter.model';
 
 @Injectable()
 export class DogService {
@@ -11,5 +12,9 @@ export class DogService {
 
   getAll(): Observable<Dog[]> {
     return this.apiService.get('dog');
+  }
+
+  filter(filter: Filter): Observable<Dog[]> {
+    return this.apiService.post('dog',filter);
   }
 }

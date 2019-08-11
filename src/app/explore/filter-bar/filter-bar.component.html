@@ -1,10 +1,10 @@
 <mat-toolbar class="mat-elevation-z1">
   <mat-icon>search</mat-icon>
   <mat-form-field>
-    <mat-select placeholder="Gender" [formControl]="genders" multiple>
+    <mat-select  placeholder="Gender" [(value)]="filter.genders" multiple (selectionChange) = "emitFilterRequest()">
       <mat-select-trigger>
         <mat-chip-list>
-          <mat-chip *ngFor="let gender of genders.value">{{gender}}</mat-chip>
+          <mat-chip *ngFor="let gender of filter.genders">{{gender}}</mat-chip>
         </mat-chip-list>
       </mat-select-trigger>
       <mat-option value="male">Male</mat-option>
