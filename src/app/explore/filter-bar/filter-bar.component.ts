@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Filter } from 'src/app/core/models/filter.model';
+import { Breed } from 'src/app/core/models/breed.model';
+import { BreedService } from 'src/app/core/services/breed.service';
 
 @Component({
   selector: 'app-filter-bar',
@@ -9,16 +11,22 @@ import { Filter } from 'src/app/core/models/filter.model';
 })
 export class FilterBarComponent implements OnInit {
   filter: Filter;
-
+  breeds: Breed[];
   @Output() filterRequest = new EventEmitter<Filter>();
 
-  constructor() { }
+  constructor(
+    private breedService: BreedService
+  ) { }
 
   ngOnInit() {
     this.filter = {
       genders: [],
       minAge: 0
     }
+
+    this.breedService.getAll().subscribe((data:Breed[]) => {
+      this.breeds = data;
+    })
   }
 
   emitFilterRequest() {

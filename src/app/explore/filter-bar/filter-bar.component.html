@@ -12,6 +12,13 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field>
+    <mat-label>Breeds</mat-label>
+    <mat-select multiple>
+      <mat-option *ngFor="let breed of breeds" [value]="breed.Breed">{{breed.Breed}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <span class="form-title">
     Minimun Age
   </span>

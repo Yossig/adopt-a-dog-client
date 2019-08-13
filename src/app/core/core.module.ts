@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from './services/api.service';
 import { DogService } from './services/dog.service';
+import { BreedService } from './services/breed.service';
 
 @NgModule({
   imports:[
@@ -9,7 +10,8 @@ import { DogService } from './services/dog.service';
   ],
   providers:[
     ApiService,
-    DogService
+    DogService,
+    BreedService
   ]
 })
 export class CoreModule{}
