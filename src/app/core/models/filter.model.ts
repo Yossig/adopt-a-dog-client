@@ -1,4 +1,5 @@
 export interface Filter {
-  genders: [],
-  minAge: number
+  genders: string[],
+  minAge: number,
+  breeds: string[]
 }

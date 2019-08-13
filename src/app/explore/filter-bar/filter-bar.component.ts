@@ -21,7 +21,8 @@ export class FilterBarComponent implements OnInit {
   ngOnInit() {
     this.filter = {
       genders: [],
-      minAge: 0
+      minAge: 0,
+      breeds: []
     }
 
     this.breedService.getAll().subscribe((data:Breed[]) => {
