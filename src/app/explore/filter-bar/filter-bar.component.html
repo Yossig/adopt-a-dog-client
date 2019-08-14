@@ -1,27 +1,30 @@
 <mat-toolbar class="mat-elevation-z1">
-  <mat-icon>search</mat-icon>
-  <mat-form-field>
-    <mat-select placeholder="Gender" [(value)]="filter.genders" multiple (selectionChange)="emitFilterRequest()">
-      <mat-select-trigger>
-        <mat-chip-list>
-          <mat-chip *ngFor="let gender of filter.genders">{{gender}}</mat-chip>
-        </mat-chip-list>
-      </mat-select-trigger>
-      <mat-option value="male">Male</mat-option>
-      <mat-option value="female">Female</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-icon>search</mat-icon>
+    <div class="container">
+        <mat-form-field class="item">
+            <mat-select placeholder="Gender" [(value)]="filter.genders" multiple (selectionChange)="emitFilterRequest()">
+                <mat-select-trigger>
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let gender of filter.genders">{{gender}}</mat-chip>
+                    </mat-chip-list>
+                </mat-select-trigger>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="female">Female</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-  <mat-form-field>
-    <mat-select placeholder="Breeds" [(value)]="filter.breeds" multiple (selectionChange)="emitFilterRequest()">
-      <mat-option *ngFor="let breed of breeds" [value]="breed.Breed">{{breed.Breed}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+        <mat-form-field class="item">
+            <mat-select placeholder="Breeds" [(value)]="filter.breeds" multiple (selectionChange)="emitFilterRequest()">
+                <mat-option *ngFor="let breed of breeds" [value]="breed.Breed">{{breed.Breed}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-  <span class="form-title">
-    Minimun Age
-  </span>
-  <mat-slider min="0" max="18" step="1" thumbLabel="true" [(value)]="filter.minAge" (change)="emitFilterRequest()">
-  </mat-slider>
-
+        <div class="item">
+            <span class="form-title">
+        Minimun Age
+      </span>
+            <mat-slider min="0" max="18" step="1" thumbLabel="true" [(value)]="filter.minAge" (change)="emitFilterRequest()">
+            </mat-slider>
+        </div>
+    </div>
 </mat-toolbar>

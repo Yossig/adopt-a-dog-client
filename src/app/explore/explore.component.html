@@ -1,6 +1,6 @@
 <app-filter-bar (filterRequest)="filter($event)"></app-filter-bar>
 
-<mat-grid-list *ngIf="dogs.length" cols="4" rowHeight="10:12" gutterSize="20">
+<mat-grid-list *ngIf="dogs.length" cols="4" rowHeight="9:12" gutterSize="20">
   <mat-grid-tile *ngFor="let dog of dogs">
     <mat-card class="dog-card">
       <mat-card-header>
