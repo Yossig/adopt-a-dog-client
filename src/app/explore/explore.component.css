@@ -45,3 +45,6 @@
   bottom: 3rem;
   right: 3rem;
 }
+.spacer {
+  flex: 1 1 auto;
+}
