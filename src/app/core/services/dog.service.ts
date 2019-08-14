@@ -19,6 +19,7 @@ export class DogService {
     return this.apiService.post('dog',filter).pipe(map(dogs=> {
       dogs.forEach(dog => {
         dog.owner = dog.owner[0]
+        dog.breed = dog.breed[0]
       })
       return dogs
     }));
