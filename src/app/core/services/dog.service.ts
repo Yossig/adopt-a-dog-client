@@ -3,6 +3,7 @@ import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { Dog } from '../models/dog.model';
 import { Filter } from '../models/filter.model';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class DogService {
@@ -15,6 +16,11 @@ export class DogService {
   }
 
   filter(filter: Filter): Observable<Dog[]> {
-    return this.apiService.post('dog',filter);
+    return this.apiService.post('dog',filter).pipe(map(dogs=> {
+      dogs.forEach(dog => {
+        dog.owner = dog.owner[0]
+      })
+      return dogs
+    }));
   }
 }
