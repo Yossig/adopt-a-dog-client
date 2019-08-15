@@ -27,4 +27,10 @@ export class ExploreComponent implements OnInit {
       this.dogs = data;
     })
   }
+
+  remove(dog: Dog) {
+    this.dogService.remove(dog).subscribe(success => {
+      this.dogs.splice(this.dogs.indexOf(dog), 1);
+    })
+  }
 }

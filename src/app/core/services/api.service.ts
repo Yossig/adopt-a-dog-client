@@ -15,4 +15,8 @@ export class ApiService {
   post(path: string, body: Object = {}): Observable<any> {
     return this.http.post(path, body);
   }
+
+  delete(path: string): Observable<any> {
+    return this.http.delete(path)
+  }
 }

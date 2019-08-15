@@ -12,16 +12,20 @@ export class DogService {
   ) { }
 
   getAll(): Observable<Dog[]> {
-    return this.apiService.get('dog');
+    return this.apiService.get('/dog/');
   }
 
   filter(filter: Filter): Observable<Dog[]> {
-    return this.apiService.post('dog',filter).pipe(map(dogs=> {
+    return this.apiService.post('/dog/',filter).pipe(map(dogs=> {
       dogs.forEach(dog => {
         dog.owner = dog.owner[0]
         dog.breed = dog.breed[0]
       })
       return dogs
     }));
+  }
+
+  remove(dog: Dog) : Observable<any> {
+    return this.apiService.delete('/dog/' + dog._id);
   }
 }
