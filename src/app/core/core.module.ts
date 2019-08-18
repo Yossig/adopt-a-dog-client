@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from './services/api.service';
 import { DogService } from './services/dog.service';
 import { BreedService } from './services/breed.service';
+import { WsService } from './services/ws.service';
 
 @NgModule({
   imports:[
@@ -11,7 +12,8 @@ import { BreedService } from './services/breed.service';
   providers:[
     ApiService,
     DogService,
-    BreedService
+    BreedService,
+    WsService
   ]
 })
 export class CoreModule{}

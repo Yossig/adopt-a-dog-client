@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Dog } from '../core/models/dog.model';
 import { DogService } from '../core/services/dog.service';
 import { Filter } from '../core/models/filter.model';
-import { webSocket, WebSocketSubject } from "rxjs/webSocket";
+import { WsService } from '../core/services/ws.service';
 
 @Component({
   selector: 'app-explore',
@@ -12,13 +12,11 @@ import { webSocket, WebSocketSubject } from "rxjs/webSocket";
 export class ExploreComponent implements OnInit {
 
   dogs: Dog[];
-  socket$: WebSocketSubject<Dog>
   constructor(
     private dogService: DogService,
+    private wsService: WsService
 
-  ) {
-    this.socket$ = webSocket("ws://localhost:3001")
-  }
+  ) { }
 
   ngOnInit() {
 
@@ -26,7 +24,7 @@ export class ExploreComponent implements OnInit {
       this.dogs = data;
     })
 
-    this.socket$
+    this.wsService.notifyDogRemoved()
       .subscribe(
         (dog) => {
           this.findOneAndRemove(dog)
