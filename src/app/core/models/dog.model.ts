@@ -1,11 +1,25 @@
 import { User } from './user.model';
 
-export interface Dog {
-  _id: string;
+export class Dog {
+  _id?: string;
   breed: string;
   name: string;
   gender: string;
   age: number;
-  profileImage: String;
+  profile_image: String;
+  description: String;
   owner: User;
+
+  constructor() {
+    this.breed = "";
+    this.name = "";
+    this.gender = "";
+    this.age = 0;
+    this.profile_image = "";
+    this.owner = {
+      fullName : "",
+      email : "",
+      phoneNumber : ""
+    }
+  }
 }

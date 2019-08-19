@@ -3,6 +3,8 @@ import { Dog } from '../core/models/dog.model';
 import { DogService } from '../core/services/dog.service';
 import { Filter } from '../core/models/filter.model';
 import { WsService } from '../core/services/ws.service';
+import { MatDialog } from '@angular/material';
+import { EditComponent } from './edit/edit.component';
 
 @Component({
   selector: 'app-explore',
@@ -14,12 +16,12 @@ export class ExploreComponent implements OnInit {
   dogs: Dog[];
   constructor(
     private dogService: DogService,
-    private wsService: WsService
+    private wsService: WsService,
+    public editDialog: MatDialog
 
   ) { }
 
   ngOnInit() {
-
     this.dogService.getAll().subscribe((data: Dog[]) => {
       this.dogs = data;
     })
@@ -32,6 +34,12 @@ export class ExploreComponent implements OnInit {
         (err) => console.error(err),
         () => console.warn('Completed!')
       );
+
+    this.wsService.notifyDogAdded().subscribe((dog) => {
+      this.add(dog)
+    },
+      (err) => console.error(err),
+      () => console.warn('Completed!'))
   }
 
   filter(filter: Filter) {
@@ -46,6 +54,16 @@ export class ExploreComponent implements OnInit {
     })
   }
 
+  add(dog: Dog) {
+    let index = this.dogs.map(it => {
+      return it._id
+    }).indexOf(dog._id);
+
+    if (index === -1) {
+      this.dogs.push(dog);
+    }
+  }
+
   findOneAndRemove(dog: Dog) {
     let index = this.dogs.map(it => {
       return it._id
@@ -54,5 +72,34 @@ export class ExploreComponent implements OnInit {
     if (index !== -1) {
       this.dogs.splice(index, 1);
     }
+  }
+
+  openAddDialog() {
+    const dialogRef = this.editDialog.open(EditComponent, {
+      width: '300px',
+      data: new Dog()
+    })
+
+    dialogRef.afterClosed().subscribe(newDog => {
+      if (newDog) {
+        this.dogService.add(newDog).subscribe(result => {
+          this.add(result);
+        })
+      }
+    })
+  }
+
+  openEditDialog(dog: Dog) {
+    const dialogRef = this.editDialog.open(EditComponent, {
+      width: '300px',
+      data: { ...dog }
+    })
+
+    dialogRef.afterClosed().subscribe(updatedDog => {
+      if (updatedDog) {
+        console.log(updatedDog)
+        //invoke update
+      }
+    })
   }
 }
