@@ -17,6 +17,15 @@ import {
   selector: 'app-explore',
   templateUrl: './explore.component.html',
   styleUrls: ['./explore.component.css'],
+  animations: [
+    trigger('simpleFadeAnimation', [
+      state('in', style({ opacity: 1 })),
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(500)
+      ])
+    ])
+  ]
 })
 export class ExploreComponent implements OnInit {
 
