@@ -16,7 +16,7 @@ export class DogService {
   }
 
   filter(filter: Filter): Observable<Dog[]> {
-    return this.apiService.post('/dog/', filter).pipe(map(dogs => {
+    return this.apiService.post('/dog/filter/', filter).pipe(map(dogs => {
       dogs.forEach(dog => {
         dog.owner = dog.owner[0]
         dog.breed = dog.breed[0]
@@ -30,6 +30,6 @@ export class DogService {
   }
 
   add(dog: Dog): Observable<Dog> {
-    return this.apiService.post('/dog/add/', dog);
+    return this.apiService.post('/dog/', dog);
   }
 }
