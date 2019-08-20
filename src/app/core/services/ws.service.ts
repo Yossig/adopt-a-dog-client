@@ -28,12 +28,26 @@ export class WsService {
   notifyDogAdded(): Observable<Dog> {
     return new Observable(subscriber => {
       this.socket$.subscribe(
-        msg=> {
-          if(msg.action === "dogAdded") {
+        msg => {
+          if (msg.action === "dogAdded") {
             subscriber.next(msg.data)
           }
         }
       )
     })
   }
+
+  notifyDogUpdated(): Observable<Dog> {
+    return new Observable(subscriber => {
+      this.socket$.subscribe(
+        msg => {
+          if (msg.action === "dogUpdated") {
+            subscriber.next(msg.data)
+          }
+        }
+      )
+    })
+  }
+
+
 }

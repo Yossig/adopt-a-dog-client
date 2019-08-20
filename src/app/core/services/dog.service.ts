@@ -32,4 +32,8 @@ export class DogService {
   add(dog: Dog): Observable<Dog> {
     return this.apiService.post('/dog/', dog);
   }
+
+  update(dog : Dog): Observable<Dog> {
+    return this.apiService.put('/dog/',dog);
+  }
 }

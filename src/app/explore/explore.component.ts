@@ -35,11 +35,22 @@ export class ExploreComponent implements OnInit {
         () => console.warn('Completed!')
       );
 
-    this.wsService.notifyDogAdded().subscribe((dog) => {
-      this.add(dog)
-    },
-      (err) => console.error(err),
-      () => console.warn('Completed!'))
+    this.wsService.notifyDogAdded()
+      .subscribe(
+        (dog) => {
+          this.add(dog)
+        },
+        (err) => console.error(err),
+        () => console.warn('Completed!'))
+
+    this.wsService.notifyDogUpdated()
+      .subscribe(
+        (dog) => {
+          this.findOneAndUpdate(dog)
+        },
+        (err) => console.error(err),
+        () => console.warn('Completed!')
+      )
   }
 
   filter(filter: Filter) {
@@ -74,6 +85,16 @@ export class ExploreComponent implements OnInit {
     }
   }
 
+  findOneAndUpdate(dog: Dog) {
+    let index = this.dogs.map(it => {
+      return it._id
+    }).indexOf(dog._id);
+
+    if (index !== -1) {
+      this.dogs[index] = dog
+    }
+  }
+
   openAddDialog() {
     const dialogRef = this.editDialog.open(EditComponent, {
       width: '300px',
@@ -97,8 +118,9 @@ export class ExploreComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(updatedDog => {
       if (updatedDog) {
-        console.log(updatedDog)
-        //invoke update
+        this.dogService.update(updatedDog).subscribe(result => {
+          this.findOneAndUpdate(result);
+        })
       }
     })
   }
