@@ -1,8 +1,9 @@
 <mat-toolbar class="mat-elevation-z1">
-    <mat-icon>search</mat-icon>
+    <mat-icon>filter_list</mat-icon>
     <div class="container">
         <mat-form-field class="item">
-            <mat-select placeholder="Gender" [(value)]="filter.genders" multiple (selectionChange)="emitFilterRequest()">
+            <mat-select placeholder="Gender" [(value)]="filter.genders" multiple
+                (selectionChange)="emitFilterRequest()">
                 <mat-select-trigger>
                     <mat-chip-list>
                         <mat-chip *ngFor="let gender of filter.genders">{{gender}}</mat-chip>
@@ -21,9 +22,10 @@
 
         <div class="item">
             <span class="form-title">
-        Minimun Age
-      </span>
-            <mat-slider min="0" max="18" step="1" thumbLabel="true" [(value)]="filter.minAge" (change)="emitFilterRequest()">
+                Minimun Age
+            </span>
+            <mat-slider min="0" max="18" step="1" thumbLabel="true" [(value)]="filter.minAge"
+                (change)="emitFilterRequest()">
             </mat-slider>
         </div>
     </div>
