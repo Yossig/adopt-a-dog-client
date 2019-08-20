@@ -5,11 +5,18 @@ import { Filter } from '../core/models/filter.model';
 import { WsService } from '../core/services/ws.service';
 import { MatDialog } from '@angular/material';
 import { EditComponent } from './edit/edit.component';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from '@angular/animations';
 
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
-  styleUrls: ['./explore.component.css']
+  styleUrls: ['./explore.component.css'],
 })
 export class ExploreComponent implements OnInit {
 

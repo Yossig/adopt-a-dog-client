@@ -8,10 +8,11 @@ import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { EditComponent } from './edit/edit.component'
+import { ImageLazyLoadDirective } from '../core/directives/img-lazy-load.directive';
 
 
 @NgModule({
-  declarations: [ExploreComponent, FilterBarComponent, EditComponent],
+  declarations: [ExploreComponent, FilterBarComponent, EditComponent, ImageLazyLoadDirective],
   imports: [
     CommonModule,
     ExploreRoutingModule,
