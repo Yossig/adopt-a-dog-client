@@ -10,6 +10,7 @@ import {
 } from '@angular/material';
 import { ExploreModule } from './explore/explore.module';
 import { CoreModule } from './core/core.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CoreModule } from './core/core.module';
     MatToolbarModule,
     MatButtonModule,
     ExploreModule,
+    StatisticsModule,
     CoreModule
   ],
   providers: [],
