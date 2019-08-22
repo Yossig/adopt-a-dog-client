@@ -5,9 +5,9 @@ import { Dog } from '../models/dog.model';
 
 
 @Injectable()
+
 export class WsService {
   socket$: WebSocketSubject<any>
-
   constructor() {
     this.socket$ = webSocket("ws://localhost:3001")
 

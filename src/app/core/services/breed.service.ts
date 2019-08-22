@@ -6,11 +6,14 @@ import { Breed } from '../models/breed.model';
 
 @Injectable()
 export class BreedService {
+  baseUrl: string
   constructor(
     private apiService: ApiService
-  ) { }
+  ) {
+    this.baseUrl = '/api/breed/'
+  }
 
   getAll(): Observable<Breed[]> {
-    return this.apiService.get('/breed');
+    return this.apiService.get(this.baseUrl);
   }
 }

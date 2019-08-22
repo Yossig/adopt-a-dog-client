@@ -7,16 +7,19 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DogService {
+  baseUrl: string
   constructor(
     private apiService: ApiService
-  ) { }
+  ) {
+    this.baseUrl = '/api/dog/';
+  }
 
   getAll(): Observable<Dog[]> {
-    return this.apiService.get('/dog/');
+    return this.apiService.get('/api/dog/');
   }
 
   filter(filter: Filter): Observable<Dog[]> {
-    return this.apiService.post('/dog/filter/', filter).pipe(map(dogs => {
+    return this.apiService.post(this.baseUrl + '/filter/', filter).pipe(map(dogs => {
       dogs.forEach(dog => {
         dog.owner = dog.owner[0]
         dog.breed = dog.breed[0]
@@ -26,14 +29,14 @@ export class DogService {
   }
 
   remove(dog: Dog): Observable<any> {
-    return this.apiService.delete('/dog/' + dog._id);
+    return this.apiService.delete(this.baseUrl + dog._id);
   }
 
   add(dog: Dog): Observable<Dog> {
-    return this.apiService.post('/dog/', dog);
+    return this.apiService.post(this.baseUrl, dog);
   }
 
-  update(dog : Dog): Observable<Dog> {
-    return this.apiService.put('/dog/',dog);
+  update(dog: Dog): Observable<Dog> {
+    return this.apiService.put(this.baseUrl, dog);
   }
 }
