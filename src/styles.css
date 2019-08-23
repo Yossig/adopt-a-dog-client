@@ -3,5 +3,6 @@
 body {
   background-color:#f5f5f5;
   font-family: sans-serif;
+  overflow-y: scroll;
 
 }
