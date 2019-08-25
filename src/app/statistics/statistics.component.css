@@ -1,0 +1,18 @@
+.header p {
+  display: inline-block;
+  margin:auto;
+  font-weight: lighter;
+  font-family: sans-serif;
+  font-size: 3em;
+  opacity: 0.6;
+}
+
+.header p span {
+  font-weight: bold;
+}
+
+.header {
+  display: flex;
+  margin-top:10px;
+  height: 100px;
+}
