@@ -14,6 +14,9 @@ export class StatisticsService {
     return this.apiService.get('/api/statistics/lastClient');
   }
 
+  getNumberOfConnectedClients(): Observable<any> {
+    return this.apiService.get('/api/statistics/connectedClients');
+  }
   queryCountMinSketch(key): Observable<any> {
     return this.apiService.post('/api/statistics/cms/', { key: key })
   }

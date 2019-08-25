@@ -49,5 +49,16 @@ export class WsService {
     })
   }
 
+  notifyNumberOfConnectedClientsChanged(): Observable<Number> {
+    return new Observable(subscriber=> {
+      this.socket$.subscribe(
+        msg=> {
+          if (msg.action === "NumberOfConnectedClientsChanged") {
+            subscriber.next(msg.data);
+          }
+        }
+      )
+    })
+  }
 
 }
