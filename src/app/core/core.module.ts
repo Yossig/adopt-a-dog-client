@@ -4,6 +4,7 @@ import { ApiService } from './services/api.service';
 import { DogService } from './services/dog.service';
 import { BreedService } from './services/breed.service';
 import { WsService } from './services/ws.service';
+import { StatisticsService } from './services/statistics.service';
 
 @NgModule({
   imports:[
@@ -13,7 +14,8 @@ import { WsService } from './services/ws.service';
     ApiService,
     DogService,
     BreedService,
-    WsService
+    WsService,
+    StatisticsService
   ]
 })
 export class CoreModule{}

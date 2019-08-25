@@ -6,15 +6,15 @@ import { Observable } from 'rxjs';
 export class StatisticsService {
   constructor(private apiService: ApiService) { }
 
-  getUserCount(): Observable<any> {
-    return this.apiService.get('/statistics/userCount');
+  getHitCount(): Observable<any> {
+    return this.apiService.get('/api/statistics/hitCount');
   }
 
   getLastClient(): Observable<any> {
-    return this.apiService.get('/statistics/lastClient');
+    return this.apiService.get('/api/statistics/lastClient');
   }
 
   queryCountMinSketch(key): Observable<any> {
-    return this.apiService.post('/statistics/cms/', { key: key })
+    return this.apiService.post('/api/statistics/cms/', { key: key })
   }
 }
