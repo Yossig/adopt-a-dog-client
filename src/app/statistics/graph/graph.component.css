@@ -1,0 +1,6 @@
+.chart {
+  width: 650px;
+  height: 650px;
+  display: table-cell;
+  vertical-align: middle;
+}

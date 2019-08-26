@@ -14,7 +14,8 @@ export class StatisticsComponent implements OnInit {
   numberOfConnectedClients: Number
 
   constructor(private statisticService: StatisticsService,
-    private wsService: WsService) { }
+    private wsService: WsService) {
+  }
 
   ngOnInit() {
     this.statisticService.getHitCount().subscribe(res => {
@@ -31,7 +32,7 @@ export class StatisticsComponent implements OnInit {
 
     this.wsService.notifyNumberOfConnectedClientsChanged().subscribe(
       count => {
-        if(count > this.numberOfConnectedClients) {
+        if (count > this.numberOfConnectedClients) {
           this.hitCount++;
         }
         this.numberOfConnectedClients = count

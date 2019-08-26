@@ -16,3 +16,13 @@
   margin-top:10px;
   height: 100px;
 }
+
+.flex {
+  display: flex;
+}
+
+.flex div {
+  display: inline-block;
+  margin:auto;
+  margin-top: 50px;
+}
