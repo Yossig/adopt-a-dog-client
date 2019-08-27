@@ -10,9 +10,9 @@ import { Statistics } from 'src/app/core/models/statistics.model';
 export class GraphComponent implements OnInit {
   @Input() statisticsData: Statistics
   width: number = 600;
-  height: number = 300;
+  height: number = 225;
   barHeight: number = 35;
-  barMargin: number = 3;
+  barMargin: number = 2;
   margin: any;
   svg: any;
   xScale;
@@ -45,6 +45,7 @@ export class GraphComponent implements OnInit {
     this.svg = d3.select(".chart")
       .attr('width', this.width)
       .attr('height', this.height)
+      .style('background-color','rgb(0,187,212)')
       .append('g')
       .attr('transform', d => 'translate(' + 0 + ',' + (this.height - this.statisticsData.lastClient.length * (this.barHeight + this.barMargin)) / 2 + ')')
       .selectAll('rect')
@@ -55,9 +56,9 @@ export class GraphComponent implements OnInit {
       .attr('y', (d, i) => i * (this.barHeight + this.barMargin))
       .attr('width', d => this.width - this.margin.right - this.margin.left)
       .attr('height', this.barHeight)
-      .attr('fill', 'rgb(255,255,255)')
-      .style('stroke', 'black')
-      .style('stroke-opacity', 0.2)
+      .attr('fill', 'rgba(255,255,255,0.5)')
+      /*.style('stroke', 'black')
+      .style('stroke-opacity', 0.2)*/
       .exit()
 
   }
@@ -71,7 +72,7 @@ export class GraphComponent implements OnInit {
       .attr('y', (d, i) => i * (this.barHeight + this.barMargin))
       .attr('width', d => this.xScale(d.frequency) - this.margin.right - this.margin.left)
       .attr('height', this.barHeight)
-      .attr('fill', 'rgba(0,0,0,0.2)')
+      .attr('fill', 'rgba(0,0,0,0.1)')
   }
 
   addText() {
@@ -82,6 +83,7 @@ export class GraphComponent implements OnInit {
     .attr('x', d => this.margin.left + this.margin.left)
     .attr('y', (d, i) => i * (this.barHeight + this.barMargin) +  22)
     .text(d=> d.value)
+    .attr('fill','white')
 
     this.svg
     .data(this.statisticsData.lastClient)
@@ -90,6 +92,8 @@ export class GraphComponent implements OnInit {
     .attr('x', d =>  this.width - this.margin.right - this.margin.left - 40)
     .attr('y', (d, i) => i * (this.barHeight + this.barMargin) +  22)
     .text(d=> (d.frequency*100/this.statisticsData.hitCount).toFixed(1)+'%')
+    .attr('fill','white')
+   
   }
   
 
