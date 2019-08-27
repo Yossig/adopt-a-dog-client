@@ -1,6 +1,6 @@
 <mat-grid-list class="container" cols="2" rowHeight="5:1" gutterSize="50">
   <mat-grid-tile class="section mat-elevation-z1">
-    <div class="stat blue mat-elevation-z1">
+    <div [@simpleFadeAnimation] class="stat blue mat-elevation-z1">
       <div class="block">
         <div>
           <p>
@@ -17,44 +17,28 @@
         </div>
       </div>
     </div>
-    <div class="stat green mat-elevation-z1">
-        <div class="block">
-          <div>
-            <p>
-              Online Clients
-            </p>
-            <mat-icon>person</mat-icon>
-          </div>
-        </div>
-        <div class="block">
-          <div class="value">
-            <p>
-              {{statisticsData.numberOfConnectedClients}}
-            </p>
-          </div>
+    <div [@simpleFadeAnimation] class="stat green mat-elevation-z1">
+      <div class="block">
+        <div>
+          <p>
+            Online Clients
+          </p>
+          <mat-icon>person</mat-icon>
         </div>
       </div>
+      <div class="block">
+        <div class="value">
+          <p>
+            {{statisticsData.numberOfConnectedClients}}
+          </p>
+        </div>
+      </div>
+    </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="4" class="section mat-elevation-z1">.
 
   </mat-grid-tile>
   <mat-grid-tile rowspan="3" class="section mat-elevation-z1">
-    
+    <app-graph [@simpleFadeAnimation] [statisticsData]="statisticsData" class="graph"></app-graph>
   </mat-grid-tile>
 </mat-grid-list>
-
-<!--<div class="header mat-elevation-z1">
-  <p>
-    Hit Count <span>{{statisticsData.hitCount}}</span>
-  </p>
-  <p>
-    Connected Clinets <span>{{statisticsData.numberOfConnectedClients}}</span>
-  </p>
-</div>-->
-
-
-<!--<div class="flex">
-  <div>
-    <app-graph [statisticsData]="statisticsData" class="graph"></app-graph>
-  </div>
-</div>-->

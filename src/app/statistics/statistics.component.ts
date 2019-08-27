@@ -4,11 +4,21 @@ import { WsService } from '../core/services/ws.service';
 import { count } from 'rxjs/operators';
 import { Statistics } from '../core/models/statistics.model';
 import { ActivatedRoute } from '@angular/router';
+import { trigger, state, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
-  styleUrls: ['./statistics.component.css']
+  styleUrls: ['./statistics.component.css'],
+  animations: [
+    trigger('simpleFadeAnimation', [
+      state('in', style({ opacity: 1 })),
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate(500)
+      ])
+    ])
+  ]
 })
 export class StatisticsComponent implements OnInit {
 

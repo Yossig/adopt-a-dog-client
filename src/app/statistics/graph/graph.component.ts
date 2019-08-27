@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
-import { StatisticsService } from 'src/app/core/services/statistics.service';
 import { Statistics } from 'src/app/core/models/statistics.model';
 
 @Component({
@@ -10,94 +9,88 @@ import { Statistics } from 'src/app/core/models/statistics.model';
 })
 export class GraphComponent implements OnInit {
   @Input() statisticsData: Statistics
+  width: number = 600;
+  height: number = 300;
+  barHeight: number = 35;
+  barMargin: number = 3;
+  margin: any;
+  svg: any;
+  xScale;
+  yScale;
 
   constructor() {
   }
 
-  radiusScale(val: any) {
-    return d3.scaleSqrt().domain([1, this.statisticsData.hitCount]).range([0, 100])(val);
-  }
-
   ngOnInit() {
+    this.setup();
+    this.buildSvg();
+    this.populate();
+    this.addText();
 
-    var width = 650;
-    var height = 650;
-    var hitCount = this.statisticsData.hitCount
-    var radiusScale = d3.scaleSqrt().domain([1, this.statisticsData.hitCount]).range([0, 100])
-
-    var circles = d3.select(".chart")
-      .selectAll("div")
-      .data(this.statisticsData.lastClient)
-      .enter()
-      .append("circle")
-      .attr("r", function (d) {
-        return radiusScale(d.frequency);
-      })
-      .attr("fill", function (d) {
-        const prec = d.frequency * 100 / hitCount
-        if (prec >= 90.0) {
-          return "lightgreen"
-        }
-        if (prec >= 80) {
-          return "lightblue"
-        }
-        if (prec >= 50) {
-          return "lightyellow"
-        }
-      })
-
-    var texts = d3.select(".chart")
-      .selectAll("div")
-      .data(this.statisticsData.lastClient)
-      .enter()
-      .append("text")
-      .text(function (d) {
-        return `${d.value}`
-      })
-      .style("font-size", "1.5em")
-
-    var precents = d3.select(".chart")
-      .selectAll("div")
-      .data(this.statisticsData.lastClient)
-      .enter()
-      .append("text")
-      .text(function (d) {
-        return `${(d.frequency * 100 / hitCount).toFixed(1)}%`
-      })
-      .style("font-weight", "bold")
-
-
-    var simulation = d3.forceSimulation()
-      .force("x", d3.forceX(width / 2).strength(0.05))
-      .force("y", d3.forceY(height / 2).strength(0.05))
-      .force("collide", d3.forceCollide(function (d: any) {
-        return radiusScale(d.frequency) + 1
-      }))
-
-    simulation.nodes(this.statisticsData.lastClient)
-      .on('tick', ticked);
-
-    function ticked() {
-      circles.attr("cx", function (d) {
-        return d.x
-      })
-        .attr("cy", function (d) {
-          return d.y
-        })
-      texts.attr("x", function (d) {
-        return d.x - (d.value.length / 2) * 10
-      })
-        .attr("y", function (d) {
-          return d.y
-        })
-      precents.attr("x", function (d) {
-        return d.x - (d.value.length / 2) * 10
-      })
-        .attr("y", function (d) {
-          return d.y + 19
-        })
-
-    }
   }
+
+  setup() {
+    this.margin = {
+      top: 15,
+      right: 15,
+      bottom: 15,
+      left: 15
+    }
+
+    this.xScale = d3.scaleLinear().range([0, this.width - this.margin.right]).domain([0, this.statisticsData.hitCount])
+
+  }
+
+  buildSvg() {
+    this.svg = d3.select(".chart")
+      .attr('width', this.width)
+      .attr('height', this.height)
+      .append('g')
+      .attr('transform', d => 'translate(' + 0 + ',' + (this.height - this.statisticsData.lastClient.length * (this.barHeight + this.barMargin)) / 2 + ')')
+      .selectAll('rect')
+      .data(this.statisticsData.lastClient)
+      .enter()
+      .append('rect')
+      .attr('x', d => this.margin.left)
+      .attr('y', (d, i) => i * (this.barHeight + this.barMargin))
+      .attr('width', d => this.width - this.margin.right - this.margin.left)
+      .attr('height', this.barHeight)
+      .attr('fill', 'rgb(255,255,255)')
+      .style('stroke', 'black')
+      .style('stroke-opacity', 0.2)
+      .exit()
+
+  }
+
+  populate() {
+    this.svg
+      .data(this.statisticsData.lastClient)
+      .enter()
+      .append('rect')
+      .attr('x', d => this.margin.left)
+      .attr('y', (d, i) => i * (this.barHeight + this.barMargin))
+      .attr('width', d => this.xScale(d.frequency) - this.margin.right - this.margin.left)
+      .attr('height', this.barHeight)
+      .attr('fill', 'rgba(0,0,0,0.2)')
+  }
+
+  addText() {
+    this.svg
+    .data(this.statisticsData.lastClient)
+    .enter()
+    .append('text')
+    .attr('x', d => this.margin.left + this.margin.left)
+    .attr('y', (d, i) => i * (this.barHeight + this.barMargin) +  22)
+    .text(d=> d.value)
+
+    this.svg
+    .data(this.statisticsData.lastClient)
+    .enter()
+    .append('text')
+    .attr('x', d =>  this.width - this.margin.right - this.margin.left - 40)
+    .attr('y', (d, i) => i * (this.barHeight + this.barMargin) +  22)
+    .text(d=> (d.frequency*100/this.statisticsData.hitCount).toFixed(1)+'%')
+  }
+  
 
 }
