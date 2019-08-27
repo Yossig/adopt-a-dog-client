@@ -49,7 +49,7 @@ export class WsService {
     })
   }
 
-  notifyNumberOfConnectedClientsChanged(): Observable<Number> {
+  notifyNumberOfConnectedClientsChanged(): Observable<number> {
     return new Observable(subscriber=> {
       this.socket$.subscribe(
         msg=> {

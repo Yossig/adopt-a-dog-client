@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { StatisticsService } from '../core/services/statistics.service';
 import { WsService } from '../core/services/ws.service';
 import { count } from 'rxjs/operators';
+import { Statistics } from '../core/models/statistics.model';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-statistics',
   templateUrl: './statistics.component.html',
@@ -12,30 +15,24 @@ export class StatisticsComponent implements OnInit {
   hitCount: number
   lastClient: any
   numberOfConnectedClients: Number
+  statisticsData: Statistics
 
   constructor(private statisticService: StatisticsService,
-    private wsService: WsService) {
+    private wsService: WsService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.statisticService.getHitCount().subscribe(res => {
-      this.hitCount = res.hitCount;
-    })
 
-    this.statisticService.getLastClient().subscribe(res => {
-      this.lastClient = res.lastClient;
-    })
-
-    this.statisticService.getNumberOfConnectedClients().subscribe(res => {
-      this.numberOfConnectedClients = res.numberOfConnectedClients;
+    this.route.data.subscribe((data: { statisticsData: Statistics }) => {
+      this.statisticsData = data.statisticsData;
     })
 
     this.wsService.notifyNumberOfConnectedClientsChanged().subscribe(
       count => {
-        if (count > this.numberOfConnectedClients) {
-          this.hitCount++;
+        if (count > this.statisticsData.numberOfConnectedClients) {
+          this.statisticsData.hitCount++;
         }
-        this.numberOfConnectedClients = count
+        this.statisticsData.numberOfConnectedClients = count
       },
       err => {
         console.error(err);

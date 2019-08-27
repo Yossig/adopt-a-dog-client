@@ -12,6 +12,7 @@ import {
   animate,
   transition
 } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-explore',
@@ -33,13 +34,14 @@ export class ExploreComponent implements OnInit {
   constructor(
     private dogService: DogService,
     private wsService: WsService,
-    public editDialog: MatDialog
+    public editDialog: MatDialog,
+    private route: ActivatedRoute
 
   ) { }
 
   ngOnInit() {
-    this.dogService.getAll().subscribe((data: Dog[]) => {
-      this.dogs = data;
+    this.route.data.subscribe((data: {dogs: Dog[]}) => {
+      this.dogs = data.dogs;
     })
 
     this.wsService.notifyDogRemoved()

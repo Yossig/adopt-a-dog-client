@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ExploreComponent } from './explore.component';
+import { ExploreResolverService } from './explore-resolver.service';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: ExploreComponent
+    component: ExploreComponent,
+    resolve: {
+      dogs: ExploreResolverService
+    }
   }
 ];
 

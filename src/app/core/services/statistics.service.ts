@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
+import { Statistics } from '../models/statistics.model';
 
 @Injectable()
 export class StatisticsService {
@@ -19,5 +20,9 @@ export class StatisticsService {
   }
   queryCountMinSketch(key): Observable<any> {
     return this.apiService.post('/api/statistics/cms/', { key: key })
+  }
+  
+  getStatisticsData(): Observable<Statistics> {
+    return this.apiService.get('/api/statistics/');
   }
 }
