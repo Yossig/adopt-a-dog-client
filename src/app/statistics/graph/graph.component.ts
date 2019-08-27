@@ -10,7 +10,7 @@ import { Statistics } from 'src/app/core/models/statistics.model';
 export class GraphComponent implements OnInit {
   @Input() statisticsData: Statistics
   width: number = 600;
-  height: number = 225;
+  height: number = 250;
   barHeight: number = 35;
   barMargin: number = 2;
   margin: any;
@@ -45,7 +45,7 @@ export class GraphComponent implements OnInit {
     this.svg = d3.select(".chart")
       .attr('width', this.width)
       .attr('height', this.height)
-      .style('background-color','rgb(0,187,212)')
+      .style('background-color','rgb(96,125,139)')
       .append('g')
       .attr('transform', d => 'translate(' + 0 + ',' + (this.height - this.statisticsData.lastClient.length * (this.barHeight + this.barMargin)) / 2 + ')')
       .selectAll('rect')
