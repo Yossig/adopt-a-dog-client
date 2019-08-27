@@ -2,6 +2,7 @@ mat-toolbar {
     font-size: 1em;
     margin-top: 10px;
     height: 100px;
+    background-color: white;    
 }
 
 .container {
