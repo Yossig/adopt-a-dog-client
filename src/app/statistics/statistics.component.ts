@@ -5,6 +5,7 @@ import { count } from 'rxjs/operators';
 import { Statistics } from '../core/models/statistics.model';
 import { ActivatedRoute } from '@angular/router';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-statistics',
@@ -26,6 +27,8 @@ export class StatisticsComponent implements OnInit {
   lastClient: any
   numberOfConnectedClients: Number
   statisticsData: Statistics
+  selectedGroup: any
+  groupObsv: Subject<any> = new Subject();
 
   constructor(private statisticService: StatisticsService,
     private wsService: WsService, private route: ActivatedRoute) {
@@ -35,6 +38,7 @@ export class StatisticsComponent implements OnInit {
 
     this.route.data.subscribe((data: { statisticsData: Statistics }) => {
       this.statisticsData = data.statisticsData;
+      this.selectedGroup = data.statisticsData.groupBy[0]
     })
 
     this.wsService.notifyNumberOfConnectedClientsChanged().subscribe(

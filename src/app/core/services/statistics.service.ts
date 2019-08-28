@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
 import { Statistics } from '../models/statistics.model';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class StatisticsService {
@@ -21,8 +22,18 @@ export class StatisticsService {
   queryCountMinSketch(key): Observable<any> {
     return this.apiService.post('/api/statistics/cms/', { key: key })
   }
-  
+
   getStatisticsData(): Observable<Statistics> {
-    return this.apiService.get('/api/statistics/');
+    return this.apiService.get('/api/statistics/').pipe(map(data => {
+      data.groupBy.forEach(group => {
+        if (group.field === "Breed") {
+          group.data.forEach(dog => {
+            dog._id = dog.breed[0].Breed
+          })
+
+        }
+      })
+      return data;
+    }));
   }
 }
