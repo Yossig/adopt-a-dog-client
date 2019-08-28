@@ -35,8 +35,14 @@
       </div>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile rowspan="4" class="section mat-elevation-z1">.
-
+  <mat-grid-tile rowspan="4" class="section mat-elevation-z1">
+    <div class="group-by">
+      <h2>Statistics By Different Fields</h2>
+      <mat-tab-group>
+        <mat-tab  [label]="group.field" *ngFor="let group of statisticsData.groupBy">
+        </mat-tab>
+      </mat-tab-group>
+    </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="3" class="section mat-elevation-z1">
     <app-graph [@simpleFadeAnimation] [statisticsData]="statisticsData" class="graph"></app-graph>

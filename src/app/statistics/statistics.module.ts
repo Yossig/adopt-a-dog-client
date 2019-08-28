@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { StatisticsRoutingModule } from './statistics-routing.module';
 import { StatisticsComponent } from './statistics.component';
 import { GraphComponent } from './graph/graph.component';
-import { MatGridListModule, MatIconModule } from '@angular/material';
+import { MatGridListModule, MatIconModule, MatTabsModule } from '@angular/material';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { MatGridListModule, MatIconModule } from '@angular/material';
     CommonModule,
     StatisticsRoutingModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatTabsModule
   ]
 })
 export class StatisticsModule { }
