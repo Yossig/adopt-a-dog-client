@@ -37,12 +37,13 @@
   </mat-grid-tile>
   <mat-grid-tile rowspan="4" class="section mat-elevation-z1">
     <div class="group-by">
+      <h2>Dogs Adopption Statistics</h2>
       <mat-button-toggle-group [(value)]="selectedGroup">
         <mat-button-toggle *ngFor="let group of statisticsData.groupBy" [value]="group" (click)="groupObsv.next(group)">
           {{group.field}}</mat-button-toggle>
       </mat-button-toggle-group>
-      <h2>Statistics By Different Fields</h2>
-      <app-group-by-graph [@simpleFadeAnimation] [group]="statisticsData.groupBy[0]" [groupObsv]="groupObsv"></app-group-by-graph>
+      <app-group-by-graph [@simpleFadeAnimation] [group]="statisticsData.groupBy[0]" [groupObsv]="groupObsv">
+      </app-group-by-graph>
     </div>
   </mat-grid-tile>
   <mat-grid-tile rowspan="3" class="section mat-elevation-z1">
