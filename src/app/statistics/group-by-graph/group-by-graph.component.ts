@@ -12,7 +12,7 @@ export class GroupByGraphComponent implements OnInit {
   @Input() groupObsv: Observable<any>
   @Input() group: any;
   width: number = 750;
-  height: number = 500;
+  height: number = 550;
   barWidth: number = 40;
   margin: any;
   svg: any;
@@ -26,7 +26,7 @@ export class GroupByGraphComponent implements OnInit {
 
   constructor() {
     this.margin = {
-      top: 15,
+      top: 35,
       right: 50,
       bottom: 40,
       left: 50
@@ -58,6 +58,8 @@ export class GroupByGraphComponent implements OnInit {
 
   setup() {
     this.max = d3.max(this.group.data, (d: any) => d.count);
+    this.min = d3.min(this.group.data, (d: any) => d.count);
+
     this.xScale = d3.scaleBand().range([0, this.width]).domain(this.group.data.map(d => d._id))
     this.yScale = d3.scaleLinear().range([0, this.height]).domain([0, this.max])
     this.yTicks = d3.scaleLinear().range([this.height, 0]).domain([0, this.max])
@@ -71,6 +73,8 @@ export class GroupByGraphComponent implements OnInit {
     this.svg = d3.select('.group-by-chart')
       .attr('width', this.width + this.margin.left + this.margin.right)
       .attr('height', this.height + this.margin.top + this.margin.bottom)
+      .style('color', 'white')
+      .style('background-color', 'rgb(96,125,139)')
       .append('g')
       .attr('transform', `translate(${this.margin.left},${this.margin.top})`)
   }
@@ -82,7 +86,15 @@ export class GroupByGraphComponent implements OnInit {
 
     this.svg.append('g')
       .attr('transform', `translate(0,${this.height})`)
+      .style('font-size', '1em')
+      .style('font-family', "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif")
       .call(this.xAxis)
+      .append('text')
+      .attr('x', this.width)
+      .attr('y', -10)
+      .style('fill', 'white')
+      .text(this.group.field)
+
   }
 
   buildYAxis() {
@@ -91,7 +103,15 @@ export class GroupByGraphComponent implements OnInit {
       .tickPadding(15)
 
     this.svg.append('g')
+      .style('font-size', '1em')
+      .style('font-family', "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif")
       .call(this.yAxis)
+      .append('text')
+      .attr('x', this.margin.left - 20)
+      .attr('y', -10)
+      .style('fill', 'white')
+      .text('Adoptions')
+
   }
 
   populate() {
@@ -103,7 +123,32 @@ export class GroupByGraphComponent implements OnInit {
       .attr('y', d => this.height - this.yScale(d.count))
       .attr('width', this.barWidth)
       .attr('height', d => this.yScale(d.count))
-      .attr('fill', '#000')
+      .attr('fill', d => {
+        switch (d.count) {
+          case this.max: {
+            return 'rgba(183,255,183,1)'
+          }
+            break;
+          case this.min: {
+            return 'rgba(255,183,183,1)'
+          }
+            break;
+          default: {
+            return 'rgba(255,255,255,1)'
+          }
+        }
+      })
+
+    this.svg.append('g')
+      .selectAll('text')
+      .data(this.group.data)
+      .enter()
+      .append('text')
+      .attr('x', (d, i) => i * (this.width / this.group.data.length) + (this.width / this.group.data.length) / 2 - this.barWidth / 2 + 10)
+      .attr('y', d =>this.height -  this.yScale(d.count) + 20)
+      .style('fill', 'rgba(0,0,0,0.6)')
+      .text(d=>d.count)
+
   }
 
 }
