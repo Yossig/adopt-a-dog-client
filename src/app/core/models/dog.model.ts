@@ -6,7 +6,7 @@ export class Dog {
   name: string;
   gender: string;
   age: number;
-  isAdopeted: boolean;
+  isAdopted: boolean;
   profile_image: String;
   description: String;
   owner: User;
@@ -17,7 +17,7 @@ export class Dog {
     this.gender = "";
     this.age = 0;
     this.profile_image = "";
-    this.isAdopeted = false;
+    this.isAdopted = false;
     this.owner = {
       fullName : "",
       email : "",
