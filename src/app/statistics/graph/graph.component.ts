@@ -20,6 +20,15 @@ export class GraphComponent implements OnInit {
   min: any;
 
   constructor() {
+    this.margin = {
+      top: 65,
+      right: 15,
+      bottom: 15,
+      left: 85
+    }
+
+    this.width = this.width - this.margin.left - this.margin.right
+    this.height = this.height - this.margin.top - this.margin.bottom
   }
 
   ngOnInit() {
@@ -32,25 +41,18 @@ export class GraphComponent implements OnInit {
   }
 
   setup() {
-    this.margin = {
-      top: 15,
-      right: 15,
-      bottom: 15,
-      left: 85
-    }
-
-    this.xScale = d3.scaleLinear().range([0, this.width - this.margin.right]).domain([0, this.statisticsData.hitCount])
+    this.xScale = d3.scaleLinear().range([0, this.width]).domain([0, this.statisticsData.hitCount])
     this.max = d3.max(this.statisticsData.lastClient, d => d.frequency)
     this.min = d3.min(this.statisticsData.lastClient, d => d.frequency)
   }
 
   buildSvg() {
     this.svg = d3.select(".chart")
-      .attr('width', this.width)
-      .attr('height', this.height)
+      .attr('width', this.width + this.margin.left + this.margin.right)
+      .attr('height', this.height + this.margin.top + this.margin.bottom)
       .style('background-color', 'rgb(96,125,139)')
       .append('g')
-      .attr('transform', d => 'translate(' + 0 + ',' + (this.height - this.statisticsData.lastClient.length * (this.barHeight + this.barMargin)) * 3 / 5 + ')')
+      .attr('transform', d => `translate(${this.margin.left}, ${this.margin.top})`)
   }
 
   buildTemplate() {
@@ -59,9 +61,9 @@ export class GraphComponent implements OnInit {
       .data(this.statisticsData.lastClient)
       .enter()
       .append('rect')
-      .attr('x', d => this.margin.left)
+      .attr('x', d => 0)
       .attr('y', (d, i) => i * (this.barHeight + this.barMargin))
-      .attr('width', d => this.width - this.margin.right - this.margin.left)
+      .attr('width', d => this.width)
       .attr('height', this.barHeight)
       .attr('fill', d => {
         if (d.frequency === this.max) {
@@ -75,7 +77,7 @@ export class GraphComponent implements OnInit {
 
     d3.select(".chart")
       .append('text')
-      .attr('x', (this.width - 393) / 2)
+      .attr('x', (this.width + this.margin.left + this.margin.right - 393) / 2)
       .attr('y', 50)
       .text("Frequency Of User Properties")
       .attr('fill', 'white')
@@ -85,7 +87,7 @@ export class GraphComponent implements OnInit {
     d3.select(".chart")
       .append('text')
       .attr('x', 10)
-      .attr('y', this.height -10)
+      .attr('y', this.height + this.margin.top)
       .text("*Data is according to the last user visited the site")
       .attr('fill', 'white')
       .style('font-family', "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif")
@@ -98,9 +100,9 @@ export class GraphComponent implements OnInit {
       .data(this.statisticsData.lastClient)
       .enter()
       .append('rect')
-      .attr('x', d => this.margin.left)
+      .attr('x', d =>0)
       .attr('y', (d, i) => i * (this.barHeight + this.barMargin))
-      .attr('width', d => this.xScale(d.frequency) - this.margin.right - this.margin.left)
+      .attr('width', d => this.xScale(d.frequency))
       .attr('height', this.barHeight)
       .attr('fill', 'rgba(0,0,0,0.2)')
   }
@@ -110,7 +112,7 @@ export class GraphComponent implements OnInit {
       .data(this.statisticsData.lastClient)
       .enter()
       .append('text')
-      .attr('x', d => this.margin.left + 10)
+      .attr('x', d => 10)
       .attr('y', (d, i) => i * (this.barHeight + this.barMargin) + 22)
       .text(d => d.value)
       .attr('fill', 'white')
@@ -119,7 +121,7 @@ export class GraphComponent implements OnInit {
       .data(this.statisticsData.lastClient)
       .enter()
       .append('text')
-      .attr('x', d => this.xScale(d.frequency) - this.margin.right - 45)
+      .attr('x', d => this.xScale(d.frequency) - 45)
       .attr('y', (d, i) => i * (this.barHeight + this.barMargin) + 22)
       .text(d => (d.frequency * 100 / this.statisticsData.hitCount).toFixed(1) + '%')
       .attr('fill', 'white')
@@ -128,7 +130,7 @@ export class GraphComponent implements OnInit {
       .data(this.statisticsData.lastClient)
       .enter()
       .append('text')
-      .attr('x', d => 10)
+      .attr('x', d => -this.margin.left + 5)
       .attr('y', (d, i) => i * (this.barHeight + this.barMargin) + 22)
       .text(d => d.field)
       .attr('fill', 'white')
