@@ -13,7 +13,7 @@ export class GroupByGraphComponent implements OnInit {
   @Input() group: any;
   width: number = 750;
   height: number = 550;
-  barWidth: number = 40;
+  barWidth: number = 30;
   margin: any;
   svg: any;
   xScale: any;
