@@ -3,6 +3,11 @@
     margin-left: 5px;
 }
 
+img {
+    width:450px;
+    height: 300px; 
+}
+
 p {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -46,7 +51,7 @@ p {
 
 .info-block div span {
     margin-left: 2px;
-    font-size: 0.85em;
+    font-size: 0.8em;
 }
 
 .mat-fab {
