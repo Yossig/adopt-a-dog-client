@@ -39,4 +39,8 @@ export class DogService {
   update(dog: Dog): Observable<Dog> {
     return this.apiService.put(this.baseUrl, dog);
   }
+
+  adopted(dog: Dog): Observable<Dog> {
+    return this.apiService.put(this.baseUrl+'adopted/', dog);
+  }
 }

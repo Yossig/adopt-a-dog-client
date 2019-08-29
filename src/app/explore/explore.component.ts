@@ -3,7 +3,7 @@ import { Dog } from '../core/models/dog.model';
 import { DogService } from '../core/services/dog.service';
 import { Filter } from '../core/models/filter.model';
 import { WsService } from '../core/services/ws.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatIconRegistry } from '@angular/material';
 import { EditComponent } from './edit/edit.component';
 import {
   trigger,
@@ -13,6 +13,7 @@ import {
   transition
 } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-explore',
@@ -35,12 +36,16 @@ export class ExploreComponent implements OnInit {
     private dogService: DogService,
     private wsService: WsService,
     public editDialog: MatDialog,
-    private route: ActivatedRoute
-
-  ) { }
+    private route: ActivatedRoute,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer
+  ) {
+    iconRegistry.addSvgIcon('adopt-dog',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/dog.svg'))
+  }
 
   ngOnInit() {
-    this.route.data.subscribe((data: {dogs: Dog[]}) => {
+    this.route.data.subscribe((data: { dogs: Dog[] }) => {
       this.dogs = data.dogs;
     })
 
@@ -64,7 +69,12 @@ export class ExploreComponent implements OnInit {
     this.wsService.notifyDogUpdated()
       .subscribe(
         (dog) => {
-          this.findOneAndUpdate(dog)
+          if (dog.isAdopted = true) {
+            this.findOneAndRemove(dog)
+          } else {
+            this.findOneAndUpdate(dog)
+          }
+          
         },
         (err) => console.error(err),
         () => console.warn('Completed!')
@@ -79,6 +89,12 @@ export class ExploreComponent implements OnInit {
 
   remove(dog: Dog) {
     this.dogService.remove(dog).subscribe(success => {
+      this.findOneAndRemove(dog)
+    })
+  }
+
+  adopted(dog: Dog) {
+    this.dogService.adopted(dog).subscribe(sucess => {
       this.findOneAndRemove(dog)
     })
   }
