@@ -122,7 +122,7 @@ export class GraphComponent implements OnInit {
       .data(this.statisticsData.lastClient)
       .enter()
       .append('text')
-      .attr('x', d => this.xScale(d.frequency) - 40)
+      .attr('x', d => this.xScale(d.frequency) - 30)
       .attr('y', (d, i) => i * (this.barHeight + this.barMargin) + this.barHeight - 5)
       .text(d => (d.frequency * 100 / this.statisticsData.hitCount).toFixed(1) + '%')
       .attr('fill', 'white')
