@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ExploreRoutingModule } from './explore-routing.module';
 import { ExploreComponent } from './explore.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MatCardModule, MatGridListModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatChipsModule, MatIconModule, MatSliderModule, MatButtonModule, MatDialogModule, MatInputModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatDividerModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatChipsModule, MatIconModule, MatSliderModule, MatButtonModule, MatDialogModule, MatInputModule, MatTooltipModule } from '@angular/material';
 import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -31,6 +31,7 @@ import { ImageLazyLoadDirective } from '../core/directives/img-lazy-load.directi
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
+    MatTooltipModule,
     FormsModule
   ],
   providers:[],

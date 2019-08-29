@@ -8,17 +8,18 @@
         <mat-card-subtitle>{{dog.breed.Breed}}, {{dog.gender}}, age of {{dog.age}}</mat-card-subtitle>
         <span class="spacer"></span>
         <button mat-icon-button color="primary">
-          <mat-icon (click)="adopted(dog)" svgIcon="adopt-dog"></mat-icon>
+          <mat-icon matTooltipPosition="above" matTooltip="Mark as adopted" (click)="adopted(dog)" svgIcon="adopt-dog">
+          </mat-icon>
         </button>
         <button (click)="openEditDialog(dog)" mat-icon-button color="primary">
-          <mat-icon>edit</mat-icon>
+          <mat-icon matTooltipPosition="above" matTooltip="Edit">edit</mat-icon>
         </button>
         <button (click)="remove(dog)" mat-icon-button color="warn">
-          <mat-icon>delete_outline</mat-icon>
+          <mat-icon matTooltipPosition="above" matTooltip="Delete">delete_outline</mat-icon>
         </button>
       </mat-card-header>
       <mat-divider></mat-divider>
-      <img mat-card-image  [@simpleFadeAnimation]= "'in'"  [src]="dog.profile_image">
+      <img mat-card-image [@simpleFadeAnimation]="'in'" [src]="dog.profile_image">
       <mat-card-content>
         <p>
           {{dog.description}}
