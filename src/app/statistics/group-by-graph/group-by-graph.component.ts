@@ -86,13 +86,14 @@ export class GroupByGraphComponent implements OnInit {
 
     this.svg.append('g')
       .attr('transform', `translate(0,${this.height})`)
-      .style('font-size', '1em')
+      .style('font-size', '0.7em')
       .style('font-family', "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif")
       .call(this.xAxis)
       .append('text')
-      .attr('x', this.width)
+      .attr('x', this.width + 10)
       .attr('y', -10)
       .style('fill', 'white')
+      .style('font-size', '1.3em')
       .text(this.group.field)
 
   }
@@ -145,9 +146,9 @@ export class GroupByGraphComponent implements OnInit {
       .enter()
       .append('text')
       .attr('x', (d, i) => i * (this.width / this.group.data.length) + (this.width / this.group.data.length) / 2 - this.barWidth / 2 + 10)
-      .attr('y', d =>this.height -  this.yScale(d.count) + 20)
+      .attr('y', d => this.height - this.yScale(d.count) + 20)
       .style('fill', 'rgba(0,0,0,0.6)')
-      .text(d=>d.count)
+      .text(d => d.count)
 
   }
 
