@@ -77,9 +77,9 @@ export class GraphComponent implements OnInit {
 
     d3.select(".chart")
       .append('text')
-      .attr('x', (this.width + this.margin.left + this.margin.right - 393) / 2)
+      .attr('x', (this.width + this.margin.left + this.margin.right - 203) / 2)
       .attr('y', 50)
-      .text("Frequency Of User Properties")
+      .text("User's Statistics")
       .attr('fill', 'white')
       .style('font-family', "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif")
       .style('font-size', '2em')
