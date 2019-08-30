@@ -37,7 +37,7 @@
   </mat-grid-tile>
   <mat-grid-tile rowspan="4" class="section mat-elevation-z1">
     <div class="group-by-title">
-      <h2>Dogs Adopptions Statistics</h2>
+      <h2>Dogs Adoptions Statistics</h2>
       <mat-button-toggle-group [(value)]="selectedGroup" class="button-group">
         <mat-button-toggle *ngFor="let group of statisticsData.groupBy" [value]="group" (click)="groupObsv.next(group)">
           {{group.field}}</mat-button-toggle>
