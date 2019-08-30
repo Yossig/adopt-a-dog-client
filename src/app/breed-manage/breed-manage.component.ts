@@ -21,7 +21,7 @@ export class BreedManageComponent implements OnInit {
     this.route.data.subscribe((data: { breeds: Breed[] }) => {
       this.dataSource = new MatTableDataSource<Breed>(data.breeds);
       this.dataSource.paginator = this.paginator;
-      this.origins = data.breeds.map(breed => breed.Origin).filter((value, index, self) => self.indexOf(value) === index)
+      this.origins = data.breeds.map(breed => breed.Origin).filter((value, index, self) => self.indexOf(value) === index).sort()
     })
 
   }
