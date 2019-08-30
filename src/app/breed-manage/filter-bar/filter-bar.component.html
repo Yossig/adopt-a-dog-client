@@ -1,7 +1,7 @@
 <mat-toolbar class="mat-elevation-z1">
   <mat-icon>filter_list</mat-icon>
   <mat-form-field>
-    <mat-select placeholder="Origin" multiple (selectionChange)="emitFilterRequest()">
+    <mat-select placeholder="Origin" [(value)]="filter.origins" multiple (selectionChange)="emitFilterRequest()">
       <mat-option *ngFor="let origin of origins" [value]="origin">{{origin}}</mat-option>
     </mat-select>
   </mat-form-field>

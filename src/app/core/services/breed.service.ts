@@ -16,4 +16,8 @@ export class BreedService {
   getAll(): Observable<Breed[]> {
     return this.apiService.get(this.baseUrl);
   }
+
+  filter(filter): Observable<Breed[]> {
+    return this.apiService.post(this.baseUrl + 'filter', filter)
+  }
 }

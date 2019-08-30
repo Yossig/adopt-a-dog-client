@@ -1,5 +1,5 @@
 <div class="container">
-  <app-filter-bar [origins]="origins"></app-filter-bar>
+  <app-filter-bar (filterRequest)="filter($event)" [origins]="origins"></app-filter-bar>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z1">
     <ng-container matColumnDef="Breed">
       <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -11,7 +11,7 @@
     </ng-container>
     <ng-container matColumnDef="Image">
       <th mat-header-cell *matHeaderCellDef>Image</th>
-      <td mat-cell *matCellDef="let element"><img [src]="element.Image"></td>
+      <td mat-cell *matCellDef="let element"><img [@simpleFadeAnimation] [src]="element.Image"></td>
     </ng-container>
     <ng-container matColumnDef="Actions">
       <th mat-header-cell *matHeaderCellDef>Actions</th>
