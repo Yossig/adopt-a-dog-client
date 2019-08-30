@@ -11,16 +11,19 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 export class BreedManageComponent implements OnInit {
 
   dataSource: any;
-  displayedColumns: string[] = ['Breed','Origin','Image'];
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  
+  origins: string[];
+  displayedColumns: string[] = ['Breed', 'Origin', 'Image', 'Actions'];
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe((data: { breeds: Breed[] }) => {
       this.dataSource = new MatTableDataSource<Breed>(data.breeds);
       this.dataSource.paginator = this.paginator;
+      this.origins = data.breeds.map(breed => breed.Origin).filter((value, index, self) => self.indexOf(value) === index)
     })
+
   }
 
 }
