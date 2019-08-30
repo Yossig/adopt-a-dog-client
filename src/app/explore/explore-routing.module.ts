@@ -6,7 +6,7 @@ import { ExploreResolverService } from './explore-resolver.service';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'explore',
     component: ExploreComponent,
     resolve: {
       dogs: ExploreResolverService
