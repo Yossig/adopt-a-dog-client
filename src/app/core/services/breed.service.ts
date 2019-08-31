@@ -20,4 +20,16 @@ export class BreedService {
   filter(filter): Observable<Breed[]> {
     return this.apiService.post(this.baseUrl + 'filter', filter)
   }
+
+  add(breed): Observable<Breed> {
+    return this.apiService.post(this.baseUrl, breed);
+  }
+
+  update(breed): Observable<Breed> {
+    return this.apiService.put(this.baseUrl, breed)
+  }
+
+  remove(breed): Observable<any> {
+    return this.apiService.delete(this.baseUrl + breed._id)
+  }
 }
