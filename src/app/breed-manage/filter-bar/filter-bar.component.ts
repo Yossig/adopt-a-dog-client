@@ -14,7 +14,8 @@ export class FilterBarComponent implements OnInit {
 
   ngOnInit() {
     this.filter = {
-      origins: []
+      origins: [],
+      search: ""
     }
   }
 
