@@ -33,8 +33,9 @@ export class ExploreComponent implements OnInit {
 
   dogs: Dog[];
   mapView: any = { show: true };
-  lat = 51.678418;
-  lng = 7.809007;
+  lat = 32.0852999;
+  lng = 34.78176759999999;
+  zoom = 11;
 
   constructor(
     private dogService: DogService,

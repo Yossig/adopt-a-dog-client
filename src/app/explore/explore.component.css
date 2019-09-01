@@ -3,6 +3,10 @@
     margin-left: 5px;
 }
 
+mat-card {
+    max-width: 420px;
+}
+
 img {
     width:450px;
     height: 300px; 
