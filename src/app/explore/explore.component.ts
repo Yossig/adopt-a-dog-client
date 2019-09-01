@@ -32,6 +32,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ExploreComponent implements OnInit {
 
   dogs: Dog[];
+  mapView: any = { show: true };
+  lat = 51.678418;
+  lng = 7.809007;
+
   constructor(
     private dogService: DogService,
     private wsService: WsService,
@@ -74,7 +78,7 @@ export class ExploreComponent implements OnInit {
           } else {
             this.findOneAndUpdate(dog)
           }
-          
+
         },
         (err) => console.error(err),
         () => console.warn('Completed!')

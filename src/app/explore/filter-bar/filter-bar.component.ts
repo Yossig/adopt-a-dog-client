@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Filter } from 'src/app/core/models/filter.model';
 import { Breed } from 'src/app/core/models/breed.model';
@@ -13,7 +13,8 @@ export class FilterBarComponent implements OnInit {
   filter: Filter;
   breeds: Breed[];
   @Output() filterRequest = new EventEmitter<Filter>();
-
+  @Input() mapView: boolean;
+  
   constructor(
     private breedService: BreedService
   ) { }
@@ -25,7 +26,7 @@ export class FilterBarComponent implements OnInit {
       breeds: []
     }
 
-    this.breedService.getAll().subscribe((data:Breed[]) => {
+    this.breedService.getAll().subscribe((data: Breed[]) => {
       this.breeds = data;
     })
   }

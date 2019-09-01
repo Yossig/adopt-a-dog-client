@@ -1,6 +1,6 @@
-<app-filter-bar (filterRequest)="filter($event)"></app-filter-bar>
+<app-filter-bar [mapView]="mapView" (filterRequest)="filter($event)"></app-filter-bar>
 
-<mat-grid-list *ngIf="dogs.length" cols="4" rowHeight="9:12" gutterSize="20">
+<mat-grid-list *ngIf="dogs.length && !mapView.show" cols="4" rowHeight="9:12" gutterSize="20">
   <mat-grid-tile *ngFor="let dog of dogs">
     <mat-card class="dog-card">
       <mat-card-header>
@@ -67,9 +67,22 @@
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
-<button (click)="openAddDialog()" mat-fab color="primary">
+<div class="map-container mat-elevation-z1">
+  <agm-map *ngIf="mapView.show" [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng" [title]="lala">
+
+        <agm-info-window>
+          
+        </agm-info-window>
+      </agm-marker>
+  </agm-map>
+</div> 
+
+<button *ngIf="!mapView.show" (click)="openAddDialog()" mat-fab color="primary">
   <mat-icon>add</mat-icon>
 </button>
+
+
 
 <div class="no-results" *ngIf="dogs.length === 0">
   <img src="../../assets/no-results.png">
