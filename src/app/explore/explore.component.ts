@@ -32,7 +32,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ExploreComponent implements OnInit {
 
   dogs: Dog[];
-  mapView: any = { show: true };
+  mapView: any = { show: false };
   lat = 32.0852999;
   lng = 34.78176759999999;
   zoom = 11;
