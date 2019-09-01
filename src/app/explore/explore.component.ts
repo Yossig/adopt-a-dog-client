@@ -74,7 +74,7 @@ export class ExploreComponent implements OnInit {
     this.wsService.notifyDogUpdated()
       .subscribe(
         (dog) => {
-          if (dog.isAdopted = true) {
+          if (dog.isAdopted === true) {
             this.findOneAndRemove(dog)
           } else {
             this.findOneAndUpdate(dog)
