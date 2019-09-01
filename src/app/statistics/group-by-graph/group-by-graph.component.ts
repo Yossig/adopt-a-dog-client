@@ -94,7 +94,9 @@ export class GroupByGraphComponent implements OnInit {
       .attr('y', -10)
       .style('fill', 'white')
       .style('font-size', '1.3em')
-      .text(this.group.field)
+      .text(() => {
+        return this.group.map || this.group.field
+      })
 
   }
 
@@ -111,7 +113,9 @@ export class GroupByGraphComponent implements OnInit {
       .attr('x', this.margin.left - 20)
       .attr('y', -10)
       .style('fill', 'white')
-      .text('Adoptions')
+      .text(() => {
+        return this.group.reduce || 'Adoptions'
+      })
 
   }
 
@@ -148,7 +152,7 @@ export class GroupByGraphComponent implements OnInit {
       .attr('x', (d, i) => i * (this.width / this.group.data.length) + (this.width / this.group.data.length) / 2 - this.barWidth / 2 + 10)
       .attr('y', d => this.height - this.yScale(d.count) + 20)
       .style('fill', 'rgba(0,0,0,0.6)')
-      .text(d => d.count)
+      .text(d => d.count.toFixed(0))
 
   }
 

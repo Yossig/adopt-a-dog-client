@@ -26,9 +26,12 @@ export class StatisticsService {
   getStatisticsData(): Observable<Statistics> {
     return this.apiService.get('/api/statistics/').pipe(map(data => {
       data.groupBy.forEach(group => {
+        group.data.forEach(it => {
+          it.count = it.count || it.value
+        });
         if (group.field === "Breed") {
-          group.data.forEach(dog => {
-            dog._id = dog.breed[0].Breed
+          group.data.forEach(it => {
+            it._id = it.breed[0].Breed
           })
 
         }
