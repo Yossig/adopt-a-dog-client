@@ -36,7 +36,7 @@ export class ExploreComponent implements OnInit {
   lat = 32.0852999;
   lng = 34.78176759999999;
   zoom = 11;
-
+  editDialogWidth = '425px';
   constructor(
     private dogService: DogService,
     private wsService: WsService,
@@ -136,7 +136,7 @@ export class ExploreComponent implements OnInit {
 
   openAddDialog() {
     const dialogRef = this.editDialog.open(EditComponent, {
-      width: '300px',
+      width: this.editDialogWidth,
       data: new Dog()
     })
 
@@ -151,7 +151,7 @@ export class ExploreComponent implements OnInit {
 
   openEditDialog(dog: Dog) {
     const dialogRef = this.editDialog.open(EditComponent, {
-      width: '300px',
+      width: this.editDialogWidth,
       data: { ...dog }
     })
 

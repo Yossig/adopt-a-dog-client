@@ -7,7 +7,7 @@ export interface User {
     city: string,
     street: string,
     number: number,
-    location : {
+    location? : {
       lat: number,
       lang: number
     }

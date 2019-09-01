@@ -21,7 +21,13 @@ export class Dog {
     this.owner = {
       fullName : "",
       email : "",
-      phoneNumber : ""
+      phoneNumber : "",
+      address: {
+        country: "",
+        city: "",
+        street: "",
+        number: 0
+      }
     }
   }
 }
